@@ -1,7 +1,7 @@
-﻿namespace FFT.Providers;
-
+﻿
 using System.Diagnostics;
 
+namespace FFT.Providers;
 public static class IProviderExtensions
 {
   /// <summary>
@@ -11,7 +11,7 @@ public static class IProviderExtensions
   public static void ThrowIfInError(this IProvider provider)
   {
     if (provider.State == ProviderStates.Error)
-      throw new Exception("Error in " + provider.Name, provider.Exception);
+      throw new Exception("Error in " + provider.Name, provider.DisposalReason);
   }
 
   /// <summary>

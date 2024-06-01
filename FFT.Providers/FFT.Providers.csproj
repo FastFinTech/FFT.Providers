@@ -5,7 +5,7 @@
     <IsPackable>true</IsPackable>
     <LangVersion>latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
-
+    <Nullable>enable</Nullable>
     <PackageId>FFT.Providers</PackageId>
     <Summary>Provider framework.</Summary>
     <Description>$(Summary)</Description>

@@ -40,9 +40,6 @@ public abstract class ProviderBase : DisposeBase, IProvider
   public Task ErrorTask => _errorTCS.Task;
 
   /// <inheritdoc />
-  public Exception Exception => DisposalReason;
-
-  /// <inheritdoc />
   public bool ShouldDisposeWhenAllUsersAreFinished { get; protected set; } = true;
 
   /// <inheritdoc />
