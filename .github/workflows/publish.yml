@@ -1,7 +1,7 @@
 name: .NET Core
 on:
   push:
-    branches: [ main  ]
+    branches: [ master  ]
 
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Stop wasting time caching packages
