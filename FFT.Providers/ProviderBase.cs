@@ -1,4 +1,6 @@
-﻿namespace FFT.Providers;
+﻿using FFT.IgnoreTasks;
+
+namespace FFT.Providers;
 /// <summary>
 /// This is a convenience, utility class that provides boiler-plate code used
 /// by many providers. You don't have to inherit this class to create a
@@ -87,9 +89,17 @@ public abstract class ProviderBase : DisposeBase, IProvider
 
   protected void RunBackgroundDisposeError(Func<Task> action)
   {
-    Task.Run(action).ContinueWith(
-      t => Dispose(t.Exception?.InnerException ?? new OperationCanceledException()),
-      TaskContinuationOptions.NotOnRanToCompletion);
+    Task.Run(async () =>
+    {
+      try
+      {
+        await action();
+      }
+      catch (Exception x)
+      {
+        KickoffDispose(x);
+      }
+    }).Ignore();
   }
 
 #pragma warning disable SA1502 // Element should not be on a single line
