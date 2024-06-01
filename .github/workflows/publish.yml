@@ -1,0 +1,33 @@
+name: .NET Core
+on:
+  push:
+    branches: [ main  ]
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true # Stop wasting time caching packages
+  DOTNET_CLI_TELEMETRY_OPTOUT: true # Disable sending usage data to Microsoft
+  # Official NuGet Feed settings
+  NUGET_FEED: https://api.nuget.org/v3/index.json
+  NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # avoid shallow clone so NerdBank.GitVersioning can do its work
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 8.x
+
+      - name: Restore
+        run: |
+          dotnet restore ./src
+          dotnet build ./src -c Release --no-restore
+          pack -v minimal -c Release --no-restore --include-symbols --include-source -o nupkg ./src/FFT.TimeStamps/FFT.TimeStamps.csproj
+          dotnet nuget push ./nupkg/*.nupkg --source $NUGET_FEED --skip-duplicate --api-key $NUGET_API_KEY

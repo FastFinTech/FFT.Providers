@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net5</TargetFrameworks>
+    <IsPackable>true</IsPackable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <PackageId>FFT.Providers</PackageId>
+    <Summary>Provider framework.</Summary>
+    <Description>$(Summary)</Description>
+    <Company>True Goodwill</Company>
+    <Authors>True Goodwill</Authors>
+    <PackageProjectUrl>https://github.com/FastFinTech/FFT.Providers</PackageProjectUrl>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <ApplicationIcon>FFT.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="D:\FFT\FFT.Providers\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ConfigureAwait.Fody" Version="3.3.2" />
+    <PackageReference Include="FFT.Disposables" Version="0.0.13" />
+    <PackageReference Include="Fody" Version="6.8.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.7.62-alpha">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Nito.AsyncEx" Version="5.1.2" />
+  </ItemGroup>
+</Project>
